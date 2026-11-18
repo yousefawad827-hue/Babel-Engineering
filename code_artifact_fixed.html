@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بابل للاستشارات الهندسية | BABEL — Engineering Solar Intelligence</title>
+    <!-- Google Fonts: Cairo & Montserrat for bilingual brand typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                        en: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        babel: {
+                            navy: '#0A1D37',
+                            navyLight: '#132F54',
+                            gold: '#D4AF37',
+                            goldDark: '#B8860B',
+                            goldLight: '#F3E5AB',
+                            agro: '#15803D',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            margin: 0;
+            padding: 0;
+        }
+
+        .font-brand-en {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0A1D37;
+            border-radius: 4px;
+        }
+
+        /* Print Layout for Executive Quotation */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+            }
+            .card-print {
+                box-shadow: none !important;
+                border: 1px solid #cbd5e1 !important;
+                break-inside: avoid;
+            }
+            @page {
+                size: A4;
+                margin: 10mm;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#D4AF37]/30 selection:text-[#0A1D37]">
+
+    <!-- Toast Notification (No alert() used) -->
+    <div id="toast-box" class="fixed bottom-5 left-5 z-50 hidden transform transition-all duration-300 no-print">
+        <div class="bg-[#0A1D37] text-white px-5 py-3 rounded-xl shadow-2xl border-2 border-[#D4AF37] flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-[#D4AF37] text-lg"></i>
+            <span id="toast-message" class="text-sm font-bold">تم تحديث المنظومة بنجاح</span>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- OFFICIAL BRAND HEADER MATCHING BABEL LOGO (NAVY #0A1D37 & GOLD #D4AF37) -->
+    <!-- ===================================================================== -->
+    <header class="bg-[#0A1D37] text-white shadow-xl border-b-4 border-[#D4AF37] sticky top-0 z-40 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-4">
+            
+            <!-- Brand Logo & Typography -->
+            <div class="flex items-center gap-3.5">
+                <!-- Custom SVG Emblem inspired by uploaded BABEL Logo -->
+                <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white p-1.5 shadow-lg border-2 border-[#D4AF37] flex items-center justify-center shrink-0">
+                    <svg viewBox="0 0 120 120" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#E5C158"/>
+                                <stop offset="50%" stop-color="#D4AF37"/>
+                                <stop offset="100%" stop-color="#A67C00"/>
+                            </linearGradient>
+                            <linearGradient id="navyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#143664"/>
+                                <stop offset="100%" stop-color="#0A1D37"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Golden Sun Rays (Top Left) -->
+                        <g fill="url(#goldGrad)">
+                            <polygon points="42,10 45,24 39,24"/>
+                            <polygon points="27,15 35,27 30,30"/>
+                            <polygon points="15,26 28,34 25,39"/>
+                            <polygon points="9,41 24,44 23,50"/>
+                            <polygon points="10,56 24,54 25,59"/>
+                        </g>
+                        <!-- Golden Sun Arc -->
+                        <path d="M 27 56 A 22 22 0 0 1 54 26" fill="none" stroke="url(#goldGrad)" stroke-width="4.5" stroke-linecap="round"/>
+                        <!-- Bold Navy Letter B -->
+                        <path d="M 52 22 H 76 C 89 22 96 29 96 39 C 96 46 92 51 86 54 C 94 57 99 63 99 72 C 99 84 89 92 75 92 H 52 Z M 67 34 V 48 H 75 C 80 48 83 45 83 41 C 83 37 80 34 75 34 Z M 67 60 V 79 H 76 C 82 79 85 75 85 69.5 C 85 64 82 60 76 60 Z" fill="url(#navyGrad)"/>
+                        <!-- Tilted Blue Solar Panel Grid -->
+                        <g transform="translate(14, 46) skewX(-24)">
+                            <rect x="0" y="0" width="44" height="32" rx="2" fill="#0F2D56" stroke="#ffffff" stroke-width="1.5"/>
+                            <line x1="14.6" y1="0" x2="14.6" y2="32" stroke="#93C5FD" stroke-width="1"/>
+                            <line x1="29.3" y1="0" x2="29.3" y2="32" stroke="#93C5FD" stroke-width="1"/>
+                            <line x1="0" y1="10.6" x2="44" y2="10.6" stroke="#93C5FD" stroke-width="1"/>
+                            <line x1="0" y1="21.3" x2="44" y2="21.3" stroke="#93C5FD" stroke-width="1"/>
+                        </g>
+                        <!-- Golden Skyline Accent inside bottom right -->
+                        <path d="M 66 86 V 69 L 71 72 V 86 M 74 86 V 64 L 79 67 V 86 M 82 86 V 73 H 86 V 86" fill="none" stroke="url(#goldGrad)" stroke-width="1.8"/>
+                        <!-- Golden Swoosh Underline -->
+                        <path d="M 10 82 Q 55 104 102 74 Q 70 112 10 82 Z" fill="url(#goldGrad)"/>
+                    </svg>
+                </div>
+
+                <!-- Brand Bilingual Title -->
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-brand-en text-xl sm:text-2xl font-black tracking-widest text-white">BABEL</span>
+                        <span class="text-xs sm:text-sm font-extrabold text-[#D4AF37] px-2 py-0.5 rounded bg-white/10 border border-[#D4AF37]/40">
+                            بابل للاستشارات الهندسية
+                        </span>
+                    </div>
+                    <p class="font-brand-en text-[10px] sm:text-xs tracking-[0.18em] text-[#D4AF37] font-bold mt-0.5">
+                        ENGINEERING SOLAR INTELLIGENCE
+                    </p>
+                    <p class="text-[11px] text-slate-300 hidden sm:block">
+                        حاسبة المنظومات الشمسية — السودان
+                    </p>
+                </div>
+            </div>
+
+            <!-- Parallel Market Currency Bar & Actions -->
+            <div class="flex flex-wrap items-center gap-2 bg-[#132F54] px-3.5 py-2 rounded-xl border border-[#D4AF37]/40">
+                <div class="flex items-center gap-1.5 text-xs font-bold">
+                    <span class="text-slate-200">🇺🇸 الدولار:</span>
+                    <input type="number" id="usdRate" value="9300" step="50" min="500" oninput="syncRates('usd')"
+                        class="w-20 px-2 py-1 rounded-lg bg-white text-[#0A1D37] font-black text-center outline-none focus:ring-2 focus:ring-[#D4AF37]" />
+                </div>
+                <div class="flex items-center gap-1.5 text-xs font-bold">
+                    <span class="text-slate-200">🇦🇪 الدرهم:</span>
+                    <input type="number" id="aedRate" value="2532" step="10" min="100" oninput="syncRates('aed')"
+                        class="w-20 px-2 py-1 rounded-lg bg-white text-[#0A1D37] font-black text-center outline-none focus:ring-2 focus:ring-[#D4AF37]" />
+                </div>
+                <button onclick="togglePriceDrawer()"
+                    class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#D4AF37] border border-[#D4AF37]/50 text-xs font-extrabold transition flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>الأسعار</span>
+                </button>
+                <button onclick="printProposal()"
+                    class="px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#D4AF37] to-[#B8860B] hover:opacity-95 text-[#0A1D37] text-xs sm:text-sm font-black shadow-md transition flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-print"></i>
+                    <span>طباعة / PDF</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Collapsible Live Market Price Editor Drawer -->
+        <div id="priceDrawer" class="hidden bg-[#071529] border-t border-[#D4AF37]/30 px-4 sm:px-6 py-4">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xs sm:text-sm font-black text-[#D4AF37] flex items-center gap-2">
+                        <i class="fa-solid fa-tags"></i>
+                        <span>لوحة تحديث أسعار المكونات والإنفرترات الزراعية والهجينة (بالجنيه السوداني SDG)</span>
+                    </h3>
+                    <button onclick="togglePriceDrawer()" class="text-xs text-slate-300 hover:text-white cursor-pointer">
+                        <i class="fa-solid fa-xmark text-base"></i>
+                    </button>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 text-xs">
+                    <div class="bg-white/5 p-2 rounded-lg border border-white/10">
+                        <label class="block text-[10px] text-slate-300 mb-1">لوح 590W (GSB/Jinko)</label>
+                        <input type="number" id="p_panel590" value="1200000" step="50000" oninput="updateCustomPrices()"
+                            class="w-full px-2 py-1 rounded bg-white text-[#0A1D37] font-black text-center" />
+                    </div>
+                    <div class="bg-white/5 p-2 rounded-lg border border-white/10">
+                        <label class="block text-[10px] text-slate-300 mb-1">ليثيوم 15 كيلو</label>
+                        <input type="number" id="p_li15" value="18500000" step="100000" oninput="updateCustomPrices()"
+                            class="w-full px-2 py-1 rounded bg-white text-[#0A1D37] font-black text-center" />
+                    </div>
+                    <div class="bg-white/5 p-2 rounded-lg border border-white/10">
+                        <label class="block text-[10px] text-slate-300 mb-1">ليثيوم 10 كيلو</label>
+                        <input type="number" id="p_li10" value="15700000" step="100000" oninput="updateCustomPrices()"
+                            class="w-full px-2 py-1 rounded bg-white text-[#0A1D37] font-black text-center" />
+                    </div>
+                    <div class="bg-white/5 p-2 rounded-lg border border-white/10">
+                        <label class="block text-[10px] text-slate-300 mb-1">ليثيوم 5 كيلو</label>
+                        <input type="number" id="p_li5" value="8500000" step="100000" oninput="updateCustomPrices()"
+                            class="w-full px-2 py-1 rounded bg-white text-[#0A1D37] font-black text-center" />
+                    </div>
+                    <div class="bg-white/5 p-2 rounded-lg border border-white/10">
+                        <label class="block text-[10px] text-slate-300 mb-1">جل 200 أمبير</label>
+                        <input type="number" id="p_gel200" value="2500000" step="50000" oninput="updateCustomPrices()"
+                            class="w-full px-2 py-1 rounded bg-white text-[#0A1D37] font-black text-center" />
+                    </div>
+                    <div class="bg-white/5 p-2 rounded-lg border border-white/10">
+                        <label class="block text-[10px] text-slate-300 mb-1">جل 100 أمبير</label>
+                        <input type="number" id="p_gel100" value="1350000" step="50000" oninput="updateCustomPrices()"
+                            class="w-full px-2 py-1 rounded bg-white text-[#0A1D37] font-black text-center" />
+                    </div>
+                    <div class="bg-emerald-950/60 p-2 rounded-lg border border-emerald-500/40">
+                        <label class="block text-[10px] text-emerald-300 mb-1">إنفرتر زراعي 4kW (3HP)</label>
+                        <input type="number" id="p_agro4" value="3900000" step="100000" oninput="updateCustomPrices()"
+                            class="w-full px-2 py-1 rounded bg-white text-[#0A1D37] font-black text-center" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===================================================================== -->
+    <!-- FORMAL PRINT HEADER (VISIBLE ONLY ON PRINT / PDF EXPORT)              -->
+    <!-- ===================================================================== -->
+    <div class="hidden print-only max-w-7xl mx-auto px-6 pt-4 pb-3 border-b-2 border-[#0A1D37] mb-4">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-14 h-14 border-2 border-[#D4AF37] rounded-xl p-1">
+                    <svg viewBox="0 0 120 120" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 52 22 H 76 C 89 22 96 29 96 39 C 96 46 92 51 86 54 C 94 57 99 63 99 72 C 99 84 89 92 75 92 H 52 Z" fill="#0A1D37"/>
+                        <path d="M 10 82 Q 55 104 102 74 Q 70 112 10 82 Z" fill="#D4AF37"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="font-brand-en text-2xl font-black text-[#0A1D37] tracking-wider">BABEL <span class="text-base font-sans text-[#B8860B]">— بابل للاستشارات الهندسية —</span></h1>
+                    <p class="font-brand-en text-[10px] tracking-[0.2em] text-[#B8860B] font-bold">ENGINEERING SOLAR INTELLIGENCE</p>
+                    <p class="text-xs text-slate-700 mt-1">
+                        العميل / المشروع: <strong id="printClientName" class="text-slate-900"></strong> |
+                        الموقع: <strong id="printCityName" class="text-slate-900"></strong>
+                    </p>
+                </div>
+            </div>
+            <div class="text-left text-xs space-y-0.5 text-slate-700">
+                <p class="font-black text-sm text-[#0A1D37]">عرض سعر فني ومالي معتمد</p>
+                <p>التاريخ: <strong id="printDate"></strong></p>
+                <p>الرقم المرجعي: <strong id="printRef"></strong></p>
+                <p>سعر الصرف: <strong id="printFx"></strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- MAIN WORKSPACE                                                        -->
+    <!-- ===================================================================== -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+            <!-- RIGHT COLUMN (7 cols): SMART INPUT & CATALOG -->
+            <div class="lg:col-span-7 space-y-6">
+
+                <!-- 1. Instant Sudanese Dialect & Arabic Natural Language Input -->
+                <section class="rounded-2xl p-5 shadow-md border-2 border-[#D4AF37] bg-gradient-to-l from-[#0A1D37] to-[#132F54] text-white no-print">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                        <h2 class="text-base sm:text-lg font-black text-white flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-lg bg-[#D4AF37] text-[#0A1D37] flex items-center justify-center text-sm font-black">
+                                <i class="fa-solid fa-bolt"></i>
+                            </span>
+                            <span>اكتب أجهزتك أو معداتك الزراعية مباشرة (بدون جداول معقدة)</span>
+                        </h2>
+                    </div>
+
+                    <textarea id="nlpInput" rows="2"
+                        placeholder="مثال: غاطس 3 حصان + طلمبة + 2 مكيف موية + تلاجة + انارة... أو: طاحونة كبيرة + خلاط + انارة"
+                        class="w-full rounded-xl border-2 border-[#D4AF37] focus:ring-4 focus:ring-[#D4AF37]/30 p-3.5 text-sm sm:text-base font-bold text-[#0A1D37] bg-white outline-none transition resize-y">غاطس 3 حصان + طلمبة + 2 مكيف موية + تلاجة + انارة</textarea>
+
+                    <div class="flex flex-wrap items-center justify-between gap-2 mt-3">
+                        <button onclick="parseNaturalText(true)"
+                            class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#D4AF37] to-[#B8860B] hover:opacity-95 text-[#0A1D37] text-sm font-black shadow-lg transition flex items-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>تحليل وتصميم المنظومة فوراً</span>
+                        </button>
+                        <button onclick="clearAllLoads()"
+                            class="px-4 py-2 rounded-xl bg-white/10 hover:bg-rose-600/80 text-white border border-white/20 text-xs sm:text-sm font-bold transition flex items-center gap-1.5 cursor-pointer">
+                            <i class="fa-solid fa-trash-can"></i>
+                            <span>تفريغ القائمة</span>
+                        </button>
+                    </div>
+
+                    <!-- Quick Presets -->
+                    <div class="mt-4 pt-3 border-t border-white/15">
+                        <span class="block text-xs font-extrabold text-[#D4AF37] mb-2">
+                            <i class="fa-solid fa-tractor ml-1"></i> نماذج جاهزة (زراعية ومنزلية):
+                        </span>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="loadPreset('agro_pure')"
+                                class="px-3 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold shadow-xs transition cursor-pointer">
+                                🚜 ري زراعي صرف (غاطس 3 حصان — إنفرتر زراعي VFD)
+                            </button>
+                            <button onclick="loadPreset('agro_big')"
+                                class="px-3 py-1.5 rounded-full bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-extrabold shadow-xs transition cursor-pointer">
+                                🌾 بيارة كبيرة (غاطس 5.5 حصان + طلمبة سطحية)
+                            </button>
+                            <button onclick="loadPreset('agro_75')"
+                                class="px-3 py-1.5 rounded-full bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-extrabold shadow-xs transition cursor-pointer">
+                                💧 غاطس 7.5 حصان (VFD 7.5kW فأكثر)
+                            </button>
+                            <button onclick="loadPreset('dual_farm')"
+                                class="px-3 py-1.5 rounded-full bg-[#D4AF37] hover:bg-[#e5c158] text-[#0A1D37] text-xs font-black shadow-xs transition cursor-pointer">
+                                🏡 مزرعة + استراحة (غاطس 3 حصان + 2 مكيف موية + تلاجة)
+                            </button>
+                            <button onclick="loadPreset('home')"
+                                class="px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/25 text-xs font-bold transition cursor-pointer">
+                                🏠 منزل متكامل (3 مكيف موية + 2 تلاجة + غسالة ومكوة)
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. System Architecture & Agricultural Inverter Mode -->
+                <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 card-print">
+                    <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-100">
+                        <h2 class="text-base sm:text-lg font-extrabold text-[#0A1D37] flex items-center gap-2">
+                            <i class="fa-solid fa-gears text-[#D4AF37]"></i>
+                            <span>هندسة المحطة ونوع الإنفرترات (زراعي / هجين / مزدوج)</span>
+                        </h2>
+                        <span id="phaseBadge" class="px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-100 text-emerald-900 border border-emerald-300">
+                            إنفرتر زراعي VFD
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs font-extrabold text-[#0A1D37] mb-1">
+                                نوع المنظومة الهندسية المطلوبة:
+                            </label>
+                            <select id="systemTopology" onchange="recalcAll()"
+                                class="w-full rounded-xl border-2 border-[#0A1D37]/20 focus:border-[#0A1D37] px-3 py-2.5 text-xs sm:text-sm font-extrabold text-[#0A1D37] bg-slate-50 outline-none">
+                                <option value="auto" selected>🤖 تلقائي ذكي (يكتشف المحطة الزراعية أو الهجينة أو المزدوجة تلقائياً)</option>
+                                <option value="agro_only">🚜 منظومة زراعية صرفة (إنفرتر زراعي VFD / MPPT بدون بطاريات للغاطسات والطلمبات)</option>
+                                <option value="dual">🏡 منظومة مزدوجة (إنفرتر زراعي مستقل للري + إنفرتر هجين وبطاريات للسكن)</option>
+                                <option value="hybrid_only">🏠 منظومة منزلية / تجارية هجينة (إنفرتر هجين + بطاريات)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">ماركة وقدرة اللوح الشمسي</label>
+                            <select id="panelModel" onchange="recalcAll()"
+                                class="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm font-bold text-slate-900 bg-white focus:border-[#0A1D37] outline-none">
+                                <option value="gsb_590" selected>GSB Solar Mono 590W — (1,200,000 ج.س)</option>
+                                <option value="jinko_590">Jinko Tiger Neo 590W — (1,200,000 ج.س)</option>
+                                <option value="jinko_615">Jinko Tiger Neo N-Type 615W — (1,320,000 ج.س)</option>
+                                <option value="longi_585">Longi Hi-MO 6 585W — (1,250,000 ج.س)</option>
+                                <option value="ja_580">JA Solar DeepBlue 580W — (1,220,000 ج.س)</option>
+                                <option value="canadian_600">Canadian Solar HiKu7 600W — (1,300,000 ج.س)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">ساعات ضخ المياه نهاراً (للري الزراعي)</label>
+                            <select id="pumpHoursDefault" onchange="applyPumpHours(this.value)"
+                                class="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm font-bold text-slate-900 bg-white focus:border-[#0A1D37] outline-none">
+                                <option value="6" selected>6 ساعات ضخ يومياً (قياسي)</option>
+                                <option value="7">7 ساعات ضخ يومياً (مكثف)</option>
+                                <option value="8">8 ساعات ضخ يومياً (أقصى إنتاج نهاري)</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. Interactive Equipment Catalog (Agro Pumps, VFD, Mills, Home) -->
+                <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 no-print">
+                    <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-slate-100">
+                        <h2 class="text-base sm:text-lg font-extrabold text-[#0A1D37] flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-[#D4AF37]"></i>
+                            <span>كتالوج الأجهزة والمعدات (زراعي، صناعي، ومنزلي)</span>
+                        </h2>
+                    </div>
+
+                    <!-- Category Tabs -->
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <button onclick="switchTab('all', this)" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-black bg-[#0A1D37] text-white transition cursor-pointer">الكل</button>
+                        <button onclick="switchTab('agri', this)" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-black bg-slate-100 text-slate-700 transition cursor-pointer">🚜 طلمبات وغاطسات</button>
+                        <button onclick="switchTab('mills', this)" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-black bg-slate-100 text-slate-700 transition cursor-pointer">⚙️ طواحين وخلاطات</button>
+                        <button onclick="switchTab('home', this)" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-black bg-slate-100 text-slate-700 transition cursor-pointer">🏠 أجهزة منزلية</button>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border border-slate-200 mb-5">
+                        <table class="w-full text-right border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-100 text-[#0A1D37] font-extrabold">
+                                    <th class="py-2.5 px-3">الجهاز / المعدة</th>
+                                    <th class="py-2 px-2 text-center">القدرة</th>
+                                    <th class="py-2 px-2 text-center">العدد</th>
+                                    <th class="py-2 px-2 text-center">نهار (س)</th>
+                                    <th class="py-2 px-2 text-center">ليل (س)</th>
+                                    <th class="py-2 px-2 text-center">التغذية</th>
+                                </tr>
+                            </thead>
+                            <tbody id="loadsTableBody" class="divide-y divide-slate-100">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Manual Override Selectors (Brands & Capacities for Agro, Hybrid & Batteries) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 bg-slate-50 p-3.5 rounded-xl border border-slate-200 mb-5 no-print">
+                        <div>
+                            <label class="block text-[11px] font-extrabold text-[#0A1D37] mb-1">الإنفرتر الزراعي (VFD)</label>
+                            <select id="agroBrandChoice" onchange="recalcAll()"
+                                class="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs font-bold bg-white text-slate-900 focus:border-[#0A1D37] outline-none mb-1.5">
+                                <option value="invt" selected>INVT (انفت الزراعي 380V)</option>
+                                <option value="veichi">Veichi (فيتشي VFD 380V)</option>
+                                <option value="solis_pump">Solis Solar Pump VFD</option>
+                                <option value="gsb_vfd">GSB Agro VFD 380V</option>
+                            </select>
+                            <select id="agroInvChoice" onchange="recalcAll()"
+                                class="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs font-bold bg-white text-slate-900 focus:border-[#0A1D37] outline-none">
+                                <option value="auto" selected>سعة تلقائية (معامل 1.35x)</option>
+                                <option value="2.2">2.2kW (لغاطس 1.5–2HP)</option>
+                                <option value="4">4kW (لغاطس 3HP)</option>
+                                <option value="5.5">5.5kW (لغاطس 4–5.5HP)</option>
+                                <option value="7.5">7.5kW (لغاطس 5.5–7.5HP)</option>
+                                <option value="11">11kW (لغاطس 10HP)</option>
+                                <option value="15">15kW (لغاطس 15HP)</option>
+                                <option value="22">22kW (لغاطس 20–25HP)</option>
+                                <option value="37">37kW (لغاطس 30–40HP صناعي)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-extrabold text-[#0A1D37] mb-1">الإنفرتر الهجين / الصناعي</label>
+                            <select id="hybridBrandChoice" onchange="recalcAll()"
+                                class="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs font-bold bg-white text-slate-900 focus:border-[#0A1D37] outline-none mb-1.5">
+                                <option value="deye" selected>Deye Hybrid (ديا الهجين/الصناعي)</option>
+                                <option value="solis">Solis Hybrid (سوليس الهجين)</option>
+                                <option value="growatt">Growatt SPF/SPH (جروات)</option>
+                                <option value="gsb">GSB Hybrid (بابل/GSB)</option>
+                            </select>
+                            <select id="hybridKwOverride" onchange="recalcAll()"
+                                class="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs font-bold bg-white text-slate-900 focus:border-[#0A1D37] outline-none">
+                                <option value="auto" selected>قدرة تلقائية ذكية</option>
+                                <option value="3.6">3.6kW (منزلي 24V)</option>
+                                <option value="5">5kW (منزلي 48V)</option>
+                                <option value="6">6kW (منزلي 48V)</option>
+                                <option value="8">8kW (تجاري/منزلي 48V)</option>
+                                <option value="10">10kW (3-Phase 380V)</option>
+                                <option value="12">12kW (3-Phase 380V)</option>
+                                <option value="15">15kW (صناعي 3-Phase)</option>
+                                <option value="20">20kW (صناعي 3-Phase)</option>
+                                <option value="50">50kW (صناعي ضخم 3-Phase)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-extrabold text-[#0A1D37] mb-1">ماركة وسعة البطاريات</label>
+                            <select id="batteryChoice" onchange="recalcAll()"
+                                class="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs font-bold bg-white text-slate-900 focus:border-[#0A1D37] outline-none">
+                                <option value="auto" selected>تلقائي ذكي (ليثيوم 48V)</option>
+                                <optgroup label="— بطاريات GSB ليثيوم —">
+                                    <option value="gsb_li15">GSB ليثيوم 15kWh (18,500,000 ج.س)</option>
+                                    <option value="gsb_li10">GSB ليثيوم 10kWh (15,700,000 ج.س)</option>
+                                    <option value="gsb_li5">GSB ليثيوم 5kWh (8,500,000 ج.س)</option>
+                                </optgroup>
+                                <optgroup label="— بطاريات Dyness (داينيس) —">
+                                    <option value="dyness_14">Dyness PowerBox 14.3kWh (21,500,000 ج.س)</option>
+                                    <option value="dyness_10">Dyness PowerBox 10.24kWh (17,200,000 ج.س)</option>
+                                    <option value="dyness_5">Dyness B4850 / DL5.0C 5.12kWh (9,600,000 ج.س)</option>
+                                </optgroup>
+                                <optgroup label="— بطاريات Deye (ديا) و Pylontech —">
+                                    <option value="deye_15">Deye RW-M15.3 15.36kWh (22,800,000 ج.س)</option>
+                                    <option value="deye_10">Deye SE-G5.1 Pro ×2 10.24kWh (18,000,000 ج.س)</option>
+                                    <option value="deye_5">Deye SE-G5.1 Pro 5.12kWh (9,800,000 ج.س)</option>
+                                    <option value="pylon_48">Pylontech US5000 4.8kWh (9,500,000 ج.س)</option>
+                                </optgroup>
+                                <optgroup label="— بطاريات الجل (GEL 12V) —">
+                                    <option value="gel200">جل 200 أمبير 12V (2,500,000 ج.س)</option>
+                                    <option value="gel100">جل 100 أمبير 12V (1,350,000 ج.س)</option>
+                                </optgroup>
+                                <option value="none">بدون بطاريات (تشغيل نهاري فقط)</option>
+                            </select>
+                            <div class="mt-1.5 flex items-center gap-1">
+                                <span class="text-[10px] font-bold text-slate-600">العدد (0=تلقائي):</span>
+                                <input type="number" id="batQtyManual" value="0" min="0" max="30" onchange="recalcAll()"
+                                    class="w-16 px-1.5 py-0.5 rounded border border-slate-300 text-xs font-black text-center bg-white" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- LEFT COLUMN (5 cols): RESULTS, BOQ & PROPOSAL SUMMARY -->
+            <div class="lg:col-span-5 space-y-6">
+                <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 card-print sticky top-20">
+                    <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-100">
+                        <h2 class="text-base sm:text-lg font-extrabold text-[#0A1D37] flex items-center gap-2">
+                            <i class="fa-solid fa-chart-pie text-[#D4AF37]"></i>
+                            <span>النتائج الهندسية والتسعير النهائي</span>
+                        </h2>
+                        <span id="systemCategoryBadge" class="px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-100 text-emerald-900 border border-emerald-300">
+                            منظومة زراعية صرفة
+                        </span>
+                    </div>
+
+                    <!-- KPI Grid -->
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <div class="bg-gradient-to-br from-[#0A1D37] to-[#132F54] text-white p-3.5 rounded-xl shadow-xs">
+                            <div class="text-[11px] font-bold text-slate-300 mb-0.5">ألواح الطاقة الشمسية</div>
+                            <div class="text-lg sm:text-xl font-black text-[#D4AF37]" id="resPanels">0 لوح</div>
+                            <div class="text-[10px] text-slate-300 mt-0.5" id="resKwp">0.00 kWp</div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-[#0A1D37] to-[#132F54] text-white p-3.5 rounded-xl shadow-xs">
+                            <div class="text-[11px] font-bold text-slate-300 mb-0.5">الإنفرتر / المحول</div>
+                            <div class="text-base sm:text-lg font-black text-[#D4AF37]" id="resInverter">—</div>
+                            <div class="text-[10px] text-slate-300 mt-0.5" id="resInverterType">—</div>
+                        </div>
+
+                        <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl">
+                            <div class="text-[11px] font-bold text-slate-600 mb-0.5">بنك البطاريات للتخزين</div>
+                            <div class="text-base font-black text-[#0A1D37]" id="resBattery">0 kWh</div>
+                            <div class="text-[10px] text-slate-500 mt-0.5" id="resBatteryModel">بدون بطاريات</div>
+                        </div>
+
+                        <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl">
+                            <div class="text-[11px] font-bold text-slate-600 mb-0.5">المضخات والطاقة اليومية</div>
+                            <div class="text-base font-black text-[#0A1D37]" id="resPumpHp">—</div>
+                            <div class="text-[10px] text-slate-500 mt-0.5" id="resDailyKwh">0.0 kWh/يوم</div>
+                        </div>
+                    </div>
+
+                    <!-- Agricultural VFD Technical Note Banner -->
+                    <div id="agroVfdBanner" class="hidden rounded-xl bg-emerald-50 border-r-4 border-emerald-600 p-3 text-xs text-emerald-950 leading-relaxed mb-4">
+                    </div>
+
+                    <!-- Engineering Equations & Verification Breakdown -->
+                    <details class="mb-5 rounded-xl border border-[#0A1D37]/20 bg-slate-50 overflow-hidden no-print" open>
+                        <summary class="px-3.5 py-2.5 bg-[#0A1D37]/5 hover:bg-[#0A1D37]/10 text-xs sm:text-sm font-black text-[#0A1D37] cursor-pointer flex items-center justify-between">
+                            <span><i class="fa-solid fa-square-root-variable text-[#B8860B] ml-1.5"></i> كشف الحساب الهندسي والقوانين المُطبّقة</span>
+                            <span class="text-[10px] font-bold text-slate-500">مراجعة دقيقة</span>
+                        </summary>
+                        <div id="mathAuditBox" class="p-3.5 text-[11px] sm:text-xs space-y-2 text-slate-800 border-t border-slate-200 leading-relaxed">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </details>
+
+                    <!-- Bill of Quantities (BOQ) Table -->
+                    <h3 class="text-sm sm:text-base font-extrabold text-[#0A1D37] mb-2.5 flex items-center gap-1.5">
+                        <i class="fa-solid fa-file-invoice-dollar text-[#D4AF37]"></i>
+                        <span>جدول الكميات والتسعير التفصيلي (BOQ)</span>
+                    </h3>
+                    <div class="overflow-x-auto rounded-xl border border-slate-200">
+                        <table class="w-full text-right border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-[#0A1D37] text-white font-extrabold">
+                                    <th class="py-2 px-2.5">البند والمواصفات الفنية</th>
+                                    <th class="py-2 px-1.5 text-center">الكمية</th>
+                                    <th class="py-2 px-2 text-left">الوحدة (ج.س)</th>
+                                    <th class="py-2 px-2.5 text-left">الإجمالي (ج.س)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="boqTableBody" class="divide-y divide-slate-100">
+                                <!-- Populated via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Multi-Currency Grand Total Banner -->
+                    <div class="mt-4 rounded-2xl bg-[#0A1D37] text-white border-2 border-[#D4AF37] p-4 space-y-2 shadow-md">
+                        <div class="flex items-center justify-between border-b border-white/15 pb-2">
+                            <span class="text-xs sm:text-sm font-extrabold text-slate-200">الإجمالي النهائي (جنيه سوداني):</span>
+                            <span class="text-lg sm:text-xl font-black text-[#D4AF37]" id="totalSdg">0 ج.س</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs sm:text-sm font-extrabold">
+                            <span class="text-slate-300">🇺🇸 المعادل بالدولار الأمريكي (USD):</span>
+                            <span class="text-white font-black" id="totalUsd">$0 USD</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs sm:text-sm font-extrabold">
+                            <span class="text-slate-300">🇦🇪 المعادل بالدرهم الإماراتي (AED):</span>
+                            <span class="text-white font-black" id="totalAed">0 AED</span>
+                        </div>
+                    </div>
+
+                    <!-- Engineering Recommendations -->
+                    <div class="mt-4 rounded-xl bg-amber-50/80 border border-[#D4AF37]/60 p-3.5 text-xs text-slate-900">
+                        <div class="font-extrabold mb-1.5 flex items-center gap-1.5 text-[#0A1D37]">
+                            <i class="fa-solid fa-shield-halved text-[#B8860B]"></i>
+                            <span>التوصيات الهندسية من بابل للاستشارات الهندسية:</span>
+                        </div>
+                        <ul id="engNotesList" class="list-disc pr-5 space-y-1 leading-relaxed text-slate-800">
+                            <!-- Populated via JS -->
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Print Footer -->
+    <footer class="hidden print-only max-w-7xl mx-auto px-6 mt-6 pt-4 border-t-2 border-[#0A1D37] text-xs text-slate-700">
+        <div class="flex justify-between items-center">
+            <div>
+                <p class="font-black text-[#0A1D37]">بابل للاستشارات الهندسية (BABEL — Engineering Solar Intelligence)</p>
+                <p>صلاحية التسعير 48 ساعة نظراً لتقلبات أسعار الصرف في السوق الموازي.</p>
+            </div>
+            <div class="text-left">
+                <p class="font-bold text-[#0A1D37]">اعتماد الإدارة الهندسية</p>
+                <p class="mt-3 text-slate-400">........................................</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // =========================================================================
+        // 1. MULTI-BRAND CATALOG: PANELS, HYBRID/INDUSTRIAL, AGRO VFD & BATTERIES
+        // =========================================================================
+        const PANEL_CATALOG = {
+            gsb_590:      { name: 'GSB Solar Mono 590W', watt: 590, voc: 51.8, price: 1200000 },
+            jinko_590:    { name: 'Jinko Tiger Neo 590W', watt: 590, voc: 52.1, price: 1200000 },
+            jinko_615:    { name: 'Jinko Tiger Neo N-Type 615W', watt: 615, voc: 53.4, price: 1320000 },
+            longi_585:    { name: 'Longi Hi-MO 6 585W', watt: 585, voc: 51.5, price: 1250000 },
+            ja_580:       { name: 'JA Solar DeepBlue 580W', watt: 580, voc: 51.2, price: 1220000 },
+            canadian_600: { name: 'Canadian Solar HiKu7 600W', watt: 600, voc: 52.8, price: 1300000 }
+        };
+
+        const HYBRID_BRANDS = {
+            deye: {
+                label: 'Deye Hybrid',
+                mult: 1.25,
+                tiers: { 3.6: 3600000, 5: 5200000, 6: 6200000, 8: 8400000, 10: 11500000, 12: 13800000, 15: 16500000, 20: 21500000, 50: 48000000 }
+            },
+            solis: {
+                label: 'Solis Hybrid',
+                mult: 1.18,
+                tiers: { 3.6: 3300000, 5: 4800000, 6: 5800000, 8: 7900000, 10: 10800000, 12: 12900000, 15: 15500000, 20: 19800000, 50: 44500000 }
+            },
+            growatt: {
+                label: 'Growatt SPF/SPH',
+                mult: 1.08,
+                tiers: { 3.6: 2900000, 5: 4200000, 6: 4900000, 8: 6800000, 10: 9500000, 12: 11400000, 15: 13800000, 20: 17900000, 50: 41000000 }
+            },
+            gsb: {
+                label: 'GSB Hybrid',
+                mult: 1.00,
+                tiers: { 3.6: 2600000, 5: 3600000, 6: 4000000, 8: 5600000, 10: 7500000, 12: 9200000, 15: 10500000, 20: 14000000, 50: 34000000 }
+            }
+        };
+
+        const AGRO_BRANDS = {
+            invt:       { label: 'INVT (انفت الزراعي 380V VFD)', mult: 1.05 },
+            veichi:     { label: 'Veichi (فيتشي 380V VFD)', mult: 1.08 },
+            solis_pump: { label: 'Solis Solar Pump VFD 380V', mult: 1.15 },
+            gsb_vfd:    { label: 'GSB Agro VFD 380V', mult: 0.95 }
+        };
+
+        const BATTERY_CATALOG = {
+            gsb_li15:  { label: 'بطارية ليثيوم GSB 15kWh (48V)', kwh: 15.0, price: 18500000, isGel: false, minV: 48 },
+            gsb_li10:  { label: 'بطارية ليثيوم GSB 10kWh (48V)', kwh: 10.0, price: 15700000, isGel: false, minV: 48 },
+            gsb_li5:   { label: 'بطارية ليثيوم GSB 5kWh (48V)',  kwh: 5.0,  price: 8500000,  isGel: false, minV: 24 },
+            dyness_14: { label: 'بطارية ليثيوم Dyness PowerBox 14.3kWh', kwh: 14.3, price: 21500000, isGel: false, minV: 48 },
+            dyness_10: { label: 'بطارية ليثيوم Dyness PowerBox 10.24kWh', kwh: 10.24, price: 17200000, isGel: false, minV: 48 },
+            dyness_5:  { label: 'بطارية ليثيوم Dyness 5.12kWh (48V)', kwh: 5.12, price: 9600000, isGel: false, minV: 48 },
+            deye_15:   { label: 'بطارية ليثيوم Deye RW-M15.3 (15.36kWh)', kwh: 15.36, price: 22800000, isGel: false, minV: 48 },
+            deye_10:   { label: 'بطارية ليثيوم Deye 10.24kWh (48V)', kwh: 10.24, price: 18000000, isGel: false, minV: 48 },
+            deye_5:    { label: 'بطارية ليثيوم Deye SE-G5.1 Pro (5.12kWh)', kwh: 5.12, price: 9800000, isGel: false, minV: 48 },
+            pylon_48:  { label: 'بطارية ليثيوم Pylontech US5000 (4.8kWh)', kwh: 4.8, price: 9500000, isGel: false, minV: 48 },
+            gel200:    { label: 'بطارية جل 200 أمبير (12V GEL)', kwh: 2.4, price: 2500000, isGel: true, minV: 12 },
+            gel100:    { label: 'بطارية جل 100 أمبير (12V GEL)', kwh: 1.2, price: 1350000, isGel: true, minV: 12 }
+        };
+
+        const PRICES = {
+            panel_590: 1200000,
+            bat_li15: 18500000,
+            bat_li10: 15700000,
+            bat_li5:  8500000,
+            bat_gel200: 2500000,
+            bat_gel100: 1350000,
+            mount_per_panel: 110000,
+
+            agroInv: {
+                2.2: { kw: 2.2, hpMax: 2,   basePrice: 2800000, desc: '2.2kW (لغاطس 1.5–2HP)' },
+                4:   { kw: 4,   hpMax: 3,   basePrice: 3900000, desc: '4kW (لغاطس 3HP)' },
+                5.5: { kw: 5.5, hpMax: 5.5, basePrice: 4800000, desc: '5.5kW (لغاطس 4–5.5HP)' },
+                7.5: { kw: 7.5, hpMax: 7.5, basePrice: 6200000, desc: '7.5kW (لغاطس 5.5–7.5HP)' },
+                11:  { kw: 11,  hpMax: 10,  basePrice: 8500000, desc: '11kW (لغاطس 10HP)' },
+                15:  { kw: 15,  hpMax: 15,  basePrice: 11200000, desc: '15kW (لغاطس 15HP)' },
+                22:  { kw: 22,  hpMax: 25,  basePrice: 15500000, desc: '22kW (لغاطس 20–25HP)' },
+                37:  { kw: 37,  hpMax: 40,  basePrice: 24500000, desc: '37kW (لغاطس 30–40HP صناعي)' }
+            }
+        };
+
+        const AED_PER_USD = 3.6725;
+
+        // =========================================================================
+        // 2. EQUIPMENT CATALOG (AGRO PUMPS, MILLS & HOME APPLIANCES)
+        // =========================================================================
+        const CATALOG = [
+            // Agricultural Pumps & Submersibles (VFD Direct Solar)
+            { id: 'sub_1hp', name: 'غاطس زراعي 1 حصان (1HP)', cat: 'agri', hp: 1, power: 750, qty: 0, day: 6, night: 0, df: 1.00, surge: 3.5, threePhase: true, keywords: [] },
+            { id: 'sub_2hp', name: 'غاطس زراعي 2 حصان (2HP)', cat: 'agri', hp: 2, power: 1500, qty: 0, day: 6, night: 0, df: 1.00, surge: 3.5, threePhase: true, keywords: [] },
+            { id: 'sub_3hp', name: 'غاطس زراعي 3 حصان (3HP)', cat: 'agri', hp: 3, power: 2200, qty: 0, day: 6, night: 0, df: 1.00, surge: 4.0, threePhase: true, keywords: [] },
+            { id: 'sub_5hp', name: 'غاطس زراعي 5.5 حصان (5.5HP)', cat: 'agri', hp: 5.5, power: 4000, qty: 0, day: 6, night: 0, df: 1.00, surge: 4.0, threePhase: true, keywords: [] },
+            { id: 'sub_7.5hp', name: 'طلمبة / غاطس 7.5 حصان (7.5HP ≈ 5.5kW)', cat: 'agri', hp: 7.5, power: 5500, qty: 0, day: 6, night: 0, df: 1.00, surge: 4.0, threePhase: true, keywords: [] },
+            { id: 'sub_10hp', name: 'غاطس زراعي 10 حصان (10HP)', cat: 'agri', hp: 10, power: 7500, qty: 0, day: 6, night: 0, df: 1.00, surge: 4.0, threePhase: true, keywords: [] },
+            { id: 'sub_15hp', name: 'غاطس زراعي 15 حصان (15HP)', cat: 'agri', hp: 15, power: 11000, qty: 0, day: 6, night: 0, df: 1.00, surge: 4.0, threePhase: true, keywords: [] },
+            { id: 'sub_20hp', name: 'غاطس زراعي 20 حصان (20HP)', cat: 'agri', hp: 20, power: 15000, qty: 0, day: 6, night: 0, df: 1.00, surge: 4.0, threePhase: true, keywords: [] },
+            { id: 'surface_pump', name: 'طلمبة سطحية زراعية (2 حصان)', cat: 'agri', hp: 2, power: 1500, qty: 0, day: 6, night: 0, df: 1.00, surge: 3.5, threePhase: true, keywords: [] },
+            // Mills, Mixers & Agro-Industrial Equipment
+            { id: 'mill_small', name: 'طاحونة حبوب متوسطة (3kW)', cat: 'mills', hp: 4, power: 3000, qty: 0, day: 3, night: 0, df: 0.85, surge: 3.5, threePhase: false, keywords: ['طاحونة صغيرة', 'طاحونة'] },
+            { id: 'mill_large', name: 'طاحونة حبوب تجارية كبيرة (5.5kW 3-Phase)', cat: 'mills', hp: 7.5, power: 5500, qty: 0, day: 4, night: 0, df: 0.85, surge: 4.0, threePhase: true, keywords: ['طاحونة كبيرة', 'طواحين'] },
+            { id: 'mixer_comm', name: 'خلاط تجاري / علف / عجين (1.5kW)', cat: 'mills', hp: 2, power: 1500, qty: 0, day: 2.5, night: 0, df: 0.80, surge: 3.0, threePhase: false, keywords: ['خلاط', 'خلاطات', 'عجانة'] },
+            { id: 'agro_trans', name: 'محول زراعي / منظم ري (2.5kW 3-Phase)', cat: 'mills', hp: 3.3, power: 2500, qty: 0, day: 5, night: 0, df: 0.90, surge: 3.0, threePhase: true, keywords: ['محول زراعي', 'محولات زراعية', 'محول'] },
+
+            // Home Appliances
+            { id: 'ac_water', name: 'مكيف موية 1 طن', cat: 'home', hp: 0, power: 350, qty: 2, day: 4, night: 4, df: 0.80, surge: 2.5, threePhase: false, keywords: ['مكيف موية', 'مكيف ماء', 'مكيفات موية', 'مكيف'] },
+            { id: 'ac_split', name: 'مكيف اسبلت 1.5 طن', cat: 'home', hp: 0, power: 1500, qty: 0, day: 4, night: 4, df: 0.80, surge: 2.5, threePhase: false, keywords: ['اسبلت', 'فريون'] },
+            { id: 'fridge', name: 'ثلاجة منزلية', cat: 'home', hp: 0, power: 150, qty: 1, day: 12, night: 12, df: 1.00, surge: 3.0, threePhase: false, keywords: ['ثلاجة', 'تلاجة', 'ثلاجات', 'تلاجات'] },
+            { id: 'freezer', name: 'ديب فريزر / ثلاجة عرض', cat: 'home', hp: 0, power: 300, qty: 0, day: 12, night: 12, df: 0.90, surge: 3.0, threePhase: false, keywords: ['فريزر', 'ديب فريزر', 'عرض'] },
+            { id: 'led', name: 'إضاءة LED (لمبة)', cat: 'home', hp: 0, power: 15, qty: 8, day: 1, night: 7, df: 1.00, surge: 1.0, threePhase: false, keywords: ['انارة', 'إنارة', 'لمبة', 'لمبات', 'اضاءة'] },
+            { id: 'fan', name: 'مروحة سقف', cat: 'home', hp: 0, power: 100, qty: 0, day: 4, night: 6, df: 0.80, surge: 1.5, threePhase: false, keywords: ['مروحة', 'مراوح', 'مرواح'] },
+            { id: 'tv', name: 'شاشة تلفزيون + رسيفر', cat: 'home', hp: 0, power: 125, qty: 0, day: 3, night: 4, df: 0.80, surge: 1.0, threePhase: false, keywords: ['شاشة', 'شاشتين', 'تلفزيون', 'رسيفر'] },
+            { id: 'starlink', name: 'جهاز ستارلينك (Starlink)', cat: 'home', hp: 0, power: 75, qty: 0, day: 12, night: 12, df: 1.00, surge: 1.0, threePhase: false, keywords: ['ستارلينك', 'starlink', 'انترنت'] },
+            { id: 'washer', name: 'غسالة ملابس', cat: 'home', hp: 0, power: 500, qty: 0, day: 1.5, night: 0, df: 0.50, surge: 2.0, threePhase: false, keywords: ['غسالة', 'غسالات'] },
+            { id: 'iron', name: 'مكواة كهربائية', cat: 'home', hp: 0, power: 1500, qty: 0, day: 0.5, night: 0, df: 0.50, surge: 1.0, threePhase: false, keywords: ['مكوة', 'مكواة'] }
+        ];
+
+        let currentTab = 'all';
+
+        // =========================================================================
+        // 3. CURRENCY & CUSTOM PRICE HANDLERS
+        // =========================================================================
+        function formatSDG(v) {
+            return Math.round(v).toLocaleString('en-US') + ' ج.س';
+        }
+
+        function syncRates(source) {
+            const usdEl = document.getElementById('usdRate');
+            const aedEl = document.getElementById('aedRate');
+            if (source === 'usd') {
+                const usd = parseFloat(usdEl.value) || 9300;
+                aedEl.value = Math.round(usd / AED_PER_USD);
+            } else {
+                const aed = parseFloat(aedEl.value) || 2532;
+                usdEl.value = Math.round(aed * AED_PER_USD);
+            }
+            recalcAll();
+        }
+
+        function togglePriceDrawer() {
+            document.getElementById('priceDrawer').classList.toggle('hidden');
+        }
+
+        function updateCustomPrices() {
+            const p590 = parseFloat(document.getElementById('p_panel590').value) || 1200000;
+            PRICES.panel_590 = p590;
+            PANEL_CATALOG.gsb_590.price = p590;
+            PANEL_CATALOG.jinko_590.price = p590;
+
+            BATTERY_CATALOG.gsb_li15.price = parseFloat(document.getElementById('p_li15').value) || 18500000;
+            BATTERY_CATALOG.gsb_li10.price = parseFloat(document.getElementById('p_li10').value) || 15700000;
+            BATTERY_CATALOG.gsb_li5.price = parseFloat(document.getElementById('p_li5').value) || 8500000;
+            BATTERY_CATALOG.gel200.price = parseFloat(document.getElementById('p_gel200').value) || 2500000;
+            BATTERY_CATALOG.gel100.price = parseFloat(document.getElementById('p_gel100').value) || 1350000;
+            PRICES.agroInv[4].basePrice = parseFloat(document.getElementById('p_agro4').value) || 3900000;
+            recalcAll();
+        }
+
+        // =========================================================================
+        // 4. CATALOG TABLE RENDERING & CONTROLS
+        // =========================================================================
+        function renderCatalogTable() {
+            const tbody = document.getElementById('loadsTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            CATALOG.forEach((item, idx) => {
+                if (currentTab !== 'all' && item.cat !== currentTab) return;
+
+                const isSelected = item.qty > 0;
+                const tr = document.createElement('tr');
+                tr.className = isSelected ? 'bg-emerald-50/70 transition' : 'hover:bg-slate-50 transition';
+
+                const feedBadge = item.cat === 'agri'
+                    ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-900">VFD مباشر</span>'
+                    : (item.threePhase
+                        ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-rose-100 text-rose-800">3-Phase</span>'
+                        : '<span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-sky-100 text-sky-900">هجين 220V</span>');
+
+                tr.innerHTML = `
+                    <td class="py-2 px-3 font-bold text-[#0A1D37]">${item.name}</td>
+                    <td class="py-2 px-2 text-center font-semibold text-slate-600">${item.power}W</td>
+                    <td class="py-2 px-2 text-center">
+                        <input type="number" min="0" max="50" value="${item.qty}" onchange="updateItem(${idx}, 'qty', this.value)"
+                            class="w-14 px-1.5 py-1 rounded-lg border border-slate-300 text-center font-black text-[#0A1D37] bg-white focus:border-[#0A1D37] outline-none" />
+                    </td>
+                    <td class="py-2 px-2 text-center">
+                        <input type="number" min="0" max="12" step="0.5" value="${item.day}" onchange="updateItem(${idx}, 'day', this.value)"
+                            class="w-14 px-1.5 py-1 rounded-lg border border-slate-300 text-center font-bold text-slate-700 bg-white focus:border-[#0A1D37] outline-none" />
+                    </td>
+                    <td class="py-2 px-2 text-center">
+                        <input type="number" min="0" max="12" step="0.5" value="${item.night}" onchange="updateItem(${idx}, 'night', this.value)"
+                            class="w-14 px-1.5 py-1 rounded-lg border border-slate-300 text-center font-bold text-slate-700 bg-white focus:border-[#0A1D37] outline-none" />
+                    </td>
+                    <td class="py-2 px-2 text-center">${feedBadge}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function switchTab(tab, btn) {
+            currentTab = tab;
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('bg-[#0A1D37]', 'text-white');
+                b.classList.add('bg-slate-100', 'text-slate-700');
+            });
+            btn.classList.remove('bg-slate-100', 'text-slate-700', 'bg-emerald-50', 'text-emerald-900', 'bg-amber-50', 'text-amber-900');
+            btn.classList.add('bg-[#0A1D37]', 'text-white');
+            renderCatalogTable();
+        }
+
+        function updateItem(idx, field, val) {
+            CATALOG[idx][field] = parseFloat(val) || 0;
+            renderCatalogTable();
+            recalcAll();
+        }
+
+        function applyPumpHours(hrs) {
+            const h = parseFloat(hrs) || 6;
+            CATALOG.forEach(item => {
+                if (item.cat === 'agri') item.day = h;
+            });
+            renderCatalogTable();
+            recalcAll();
+        }
+
+        function clearAllLoads() {
+            CATALOG.forEach(item => item.qty = 0);
+            const nlpInput = document.getElementById('nlpInput');
+            if (nlpInput) nlpInput.value = '';
+            renderCatalogTable();
+            recalcAll();
+            showToast('تم تفريغ القائمة بنجاح');
+        }
+
+        function loadPreset(type) {
+            const input = document.getElementById('nlpInput');
+            if (!input) return;
+            if (type === 'agro_pure') {
+                input.value = 'غاطس 3 حصان';
+            } else if (type === 'agro_big') {
+                input.value = 'غاطس 5.5 حصان + طلمبة';
+            } else if (type === 'agro_75') {
+                input.value = 'غاطس 7.5 حصان';
+            } else if (type === 'dual_farm') {
+                input.value = 'غاطس 3 حصان + 2 مكيف موية + تلاجة + انارة';
+            } else if (type === 'home') {
+                input.value = '3 مكيف موية + 2 تلاجة + انارة + 6 مراوح + شاشة ورسيفر + 1 غسالة ومكوة';
+            }
+            parseNaturalText(true);
+        }
+
+        // =========================================================================
+        // 5. SUDANESE DIALECT & ARABIC NLP PARSER
+        // =========================================================================
+        function parseNaturalText(notify = false) {
+            const nlpInput = document.getElementById('nlpInput');
+            const text = nlpInput ? nlpInput.value.trim() : '';
+            if (!text) {
+                renderCatalogTable();
+                recalcAll();
+                return;
+            }
+
+            CATALOG.forEach(item => item.qty = 0);
+
+            // تطبيع الأرقام العربية (٠-٩) والفاصلة العشرية (٫) إلى أرقام لاتينية
+            const normalized = text
+                .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
+                .replace(/[٫،](?=\d)/g, '.');
+            const tokens = normalized.split(/[+\n]+|،|,|(?:\s+و(?!نص)\s*)/);
+
+            tokens.forEach(rawToken => {
+                let token = rawToken.trim();
+                if (!token) return;
+
+                // ---- المضخات والغواطس: تحليل مستقل للقدرة (HP) وللعدد ----
+                const looksLikePump = /غاطس|غواطس|غاطسين|حصان|حصانين|طلمب|موتور/.test(token);
+                if (looksLikePump) {
+                    const hpRe = /(\d+(?:\.\d+)?)\s*(?:حصان|hp)/i;
+                    const hpMatch = token.match(hpRe);
+                    let hp = hpMatch ? parseFloat(hpMatch[1]) : null;
+                    if (hp === null) {
+                        if (/سبعة\s*ونص|سبعه\s*ونص/.test(token)) hp = 7.5;
+                        else if (/خمسة\s*ونص|خمس\s*ونص/.test(token)) hp = 5.5;
+                        else if (/حصانين/.test(token)) hp = 2;
+                        else if (/ثلاث/.test(token)) hp = 3;
+                        else if (/عشر/.test(token)) hp = 10;
+                        else if (/خمس/.test(token)) hp = 5.5;
+                    }
+                    // العدد: أي رقم خارج نص (رقم + حصان)، أو صيغة المثنى
+                    const rest = hpMatch ? token.replace(hpRe, ' ') : token;
+                    const cntMatch = rest.match(/(\d+)/);
+                    let q = 1;
+                    if (cntMatch) {
+                        const n = parseInt(cntMatch[1], 10);
+                        // رقم وحيد بدون كلمة "حصان" بجانب غاطس يُعتبر قدرة وليس عدداً
+                        if (hp === null && /غاطس|طلمب|موتور/.test(token)) hp = n; else q = n;
+                    } else if (/غاطسين|غاطستين|طلمبتين|موتورين|اتنين|اثنين/.test(token)) {
+                        q = 2;
+                    }
+
+                    if (hp === null) {
+                        if (/غاطس|غواطس|غاطسين/.test(token)) { setQty('sub_3hp', q); return; }   // غاطس بدون قدرة → 3HP كافتراض
+                        setQty('surface_pump', q); return;                                         // "طلمبة" / "موتور" فقط → سطحية
+                    }
+                    // اختيار أقرب صنف في الكتالوج بنفس القدرة أو الأعلى (لا نُنزل القدرة أبداً)
+                    const sizes = CATALOG.filter(i => i.id.startsWith('sub_')).sort((a, b) => a.hp - b.hp);
+                    const target = sizes.find(i => i.hp >= hp) || sizes[sizes.length - 1];
+                    setQty(target.id, q);
+                    return;
+                }
+
+                let qty = 1;
+                const numMatch = token.match(/(\d+)/);
+                if (numMatch) {
+                    qty = parseInt(numMatch[1], 10);
+                } else if (/تين|ان\b/.test(token)) {
+                    qty = 2;
+                }
+                if (token.includes('طاحون') || token.includes('طواحين')) {
+                    if (token.includes('كبير') || qty > 1) { setQty('mill_large', qty); return; }
+                    setQty('mill_small', qty); return;
+                }
+                if (token.includes('محول زراعي') || token.includes('محولات')) {
+                    setQty('agro_trans', qty); return;
+                }
+                if (token.includes('خلاط')) {
+                    setQty('mixer_comm', qty); return;
+                }
+                if (token.includes('انارة') || token.includes('إنارة') || token.includes('اضاءة')) {
+                    setQty('led', numMatch ? qty : 10); return;
+                }
+
+                for (let item of CATALOG) {
+                    if (item.keywords.some(kw => token.includes(kw))) {
+                        item.qty += qty;
+                        break;
+                    }
+                }
+            });
+
+            renderCatalogTable();
+            recalcAll();
+            if (notify) showToast('تم تحليل الأجهزة وتصميم المنظومة بنجاح');
+        }
+
+        function setQty(id, q) {
+            const item = CATALOG.find(i => i.id === id);
+            if (item) item.qty += q;
+        }
+
+        // =========================================================================
+        // 6. CORE ENGINEERING ENGINE: RIGOROUS EQUATIONS & SAFE DOM UPDATES
+        // =========================================================================
+        function recalcAll() {
+            const pshEl = document.getElementById('cityPsh');
+            const psh = pshEl ? (parseFloat(pshEl.value) || 6.0) : 6.0;
+            const usdRate = Math.max(1, parseFloat(document.getElementById('usdRate').value) || 9300);
+            const aedRate = Math.max(1, parseFloat(document.getElementById('aedRate').value) || 2532);
+            const panelKeyEl = document.getElementById('panelModel');
+            const panelKey = panelKeyEl ? panelKeyEl.value : 'gsb_590';
+            const selectedPanel = PANEL_CATALOG[panelKey] || PANEL_CATALOG.gsb_590;
+            const panelWatt = selectedPanel.watt;
+            const topologySelEl = document.getElementById('systemTopology');
+            const topologySel = topologySelEl ? topologySelEl.value : 'auto';
+
+            // Separate Agricultural Pumping Loads from General/Home/Mill Loads
+            let agroDayWh = 0;
+            let agroTotalHp = 0;
+            let agroTotalKw = 0;
+            let agroMaxHp = 0;
+            let hasAgroPumps = false;
+
+            let genDayWh = 0;
+            let genNightWh = 0;
+            let genContinuousW = 0;
+            let genMaxSingleSurgeExtraW = 0;
+            let genNeeds3Phase = false;
+            let hasGenLoads = false;
+
+            CATALOG.forEach(item => {
+                if (item.qty <= 0) return;
+
+                if (item.cat === 'agri') {
+                    hasAgroPumps = true;
+                    agroTotalHp += item.hp * item.qty;
+                    agroMaxHp = Math.max(agroMaxHp, item.hp);
+                    agroTotalKw += (item.power * item.qty) / 1000;
+                    agroDayWh += (item.power * item.qty) * item.day;
+                } else {
+                    hasGenLoads = true;
+                    const totalItemW = item.power * item.qty;
+                    genDayWh += totalItemW * item.day * item.df;
+                    genNightWh += totalItemW * item.night * item.df;
+                    genContinuousW += totalItemW * item.df;
+
+                    const singleMotorSurgeExtra = item.power * (item.surge - 1);
+                    if (singleMotorSurgeExtra > genMaxSingleSurgeExtraW) {
+                        genMaxSingleSurgeExtraW = singleMotorSurgeExtra;
+                    }
+                    if (item.threePhase) genNeeds3Phase = true;
+                }
+            });
+
+            // Determine Effective Topology
+            let effectiveMode = topologySel;
+            if (topologySel === 'auto') {
+                if (hasAgroPumps && !hasGenLoads) {
+                    effectiveMode = 'agro_only';
+                } else if (hasAgroPumps && hasGenLoads) {
+                    effectiveMode = 'dual';
+                } else {
+                    effectiveMode = 'hybrid_only';
+                }
+            }
+
+            const performanceRatio = 0.80;
+            const inverterEff = 0.92;
+            const batChoiceEl = document.getElementById('batteryChoice');
+            const batChoice = batChoiceEl ? batChoiceEl.value : 'auto';
+            const isGelSelected = (batChoice === 'gel200' || batChoice === 'gel100');
+            const batRoundTripEff = isGelSelected ? 0.85 : 0.95;
+            const safeDoD = isGelSelected ? 0.50 : 0.80;
+
+            // ---------------------------------------------------------------------
+            // SUBSYSTEM A: AGRICULTURAL VFD SOLAR PUMPING
+            // ---------------------------------------------------------------------
+            let agroPanels = 0;
+            let chosenAgroInv = null;
+            let agroReqKwp = 0;
+            const agroBrandEl = document.getElementById('agroBrandChoice');
+            const agroBrandKey = agroBrandEl ? agroBrandEl.value : 'invt';
+            const agroBrandObj = AGRO_BRANDS[agroBrandKey] || AGRO_BRANDS.invt;
+
+            let agroVfdWarning = '';
+            let agroMinVfdKw = 0;
+            if (hasAgroPumps && (effectiveMode === 'agro_only' || effectiveMode === 'dual')) {
+                const agroInvOverrideEl = document.getElementById('agroInvChoice');
+                const agroInvOverride = agroInvOverrideEl ? agroInvOverrideEl.value : 'auto';
+                const agroTiers = [2.2, 4, 5.5, 7.5, 11, 15, 22, 37];
+
+                // الحد الأدنى الهندسي لإنفرتر VFD:
+                //  1) قدرة المحركات الفعلية × 1.35 (تيار الإقلاع Surge + هامش الرأس Head)
+                //  2) وألا تقل kW الإنفرتر عن رقم الـ HP لأكبر محرك (غاطس 7.5HP → VFD لا يقل عن 7.5kW)
+                agroMinVfdKw = Math.max(agroTotalKw * 1.35, agroMaxHp);
+                const minTierKw = agroTiers.find(t => t >= agroMinVfdKw) || 37;
+
+                let chosenTierKw = minTierKw;
+                if (agroInvOverride !== 'auto') {
+                    const manualKw = parseFloat(agroInvOverride);
+                    if (manualKw >= minTierKw) {
+                        chosenTierKw = manualKw;
+                    } else {
+                        // اختيار يدوي أصغر من اللازم: نرفعه تلقائياً بدل أن نصمم منظومة لا تعمل
+                        agroVfdWarning = `الإنفرتر ${manualKw}kW المختار لا يكفي لمحركات ${agroTotalHp}HP (${agroTotalKw.toFixed(2)}kW) — تم رفعه تلقائياً إلى ${minTierKw}kW.`;
+                    }
+                }
+                const tierObj = PRICES.agroInv[chosenTierKw];
+                if (tierObj) {
+                    chosenAgroInv = {
+                        kw: tierObj.kw,
+                        hpMax: tierObj.hpMax,
+                        price: Math.round(tierObj.basePrice * agroBrandObj.mult),
+                        label: `${agroBrandObj.label} — ${tierObj.desc}`
+                    };
+                }
+
+                agroReqKwp = agroTotalKw * 1.35;
+                const calcAgroPanels = Math.ceil((agroReqKwp * 1000) / panelWatt);
+                agroPanels = Math.max(12, calcAgroPanels); // حد أدنى 12 لوح لجهد DC لازم لـ VFD ثلاثي الأطوار 380V
+            }
+
+            // ---------------------------------------------------------------------
+            // SUBSYSTEM B: HOME / COMMERCIAL / INDUSTRIAL HYBRID
+            // ---------------------------------------------------------------------
+            let genPanels = 0;
+            let chosenHybridKw = 0;
+            let sysDcVoltage = 48;
+            let batLabel = 'بدون بطاريات';
+            let batUnitPrice = 0;
+            let batQty = 0;
+            let actualBatKwh = 0;
+            let genReqKwp = 0;
+            let reqBatNominalKwh = 0;
+            let minStringPanels = 4;
+
+            const hybridBrandEl = document.getElementById('hybridBrandChoice');
+            const hybridBrandKey = hybridBrandEl ? hybridBrandEl.value : 'deye';
+            const hybridBrandObj = HYBRID_BRANDS[hybridBrandKey] || HYBRID_BRANDS.deye;
+            const hybridKwOverrideEl = document.getElementById('hybridKwOverride');
+            const hybridKwOverride = hybridKwOverrideEl ? hybridKwOverrideEl.value : 'auto';
+
+            if (hasGenLoads && (effectiveMode === 'hybrid_only' || effectiveMode === 'dual')) {
+                const simultaneityFactor = 0.85;
+                const designContKw = (genContinuousW * simultaneityFactor * 1.25) / 1000;
+                const peakWithSurgeKw = ((genContinuousW * simultaneityFactor) + genMaxSingleSurgeExtraW) / 1000;
+                const reqHybridKw = Math.max(designContKw, peakWithSurgeKw / 1.5);
+
+                const stdHybrid = [3.6, 5, 6, 8, 10, 12, 15, 20, 50];
+                if (hybridKwOverride !== 'auto') {
+                    chosenHybridKw = parseFloat(hybridKwOverride);
+                } else {
+                    chosenHybridKw = stdHybrid.find(s => s >= reqHybridKw) || 50;
+                    if (genNeeds3Phase && chosenHybridKw < 10) chosenHybridKw = 12;
+                }
+
+                const is3PhaseInv = chosenHybridKw >= 10 || genNeeds3Phase;
+                sysDcVoltage = chosenHybridKw <= 3.6 ? 24 : 48;
+                minStringPanels = is3PhaseInv ? 10 : (sysDcVoltage === 24 ? 3 : 4);
+
+                const nightKwh = genNightWh / 1000;
+                reqBatNominalKwh = nightKwh / (safeDoD * inverterEff);
+                const batQtyManualEl = document.getElementById('batQtyManual');
+                const manualBatQty = batQtyManualEl ? (parseInt(batQtyManualEl.value) || 0) : 0;
+
+                if (batChoice !== 'none') {
+                    if (batChoice === 'auto') {
+                        let autoKey = null;
+                        if (reqBatNominalKwh <= 0.3) {
+                            batQty = 0;
+                        } else if (reqBatNominalKwh <= 5.2) {
+                            autoKey = hybridBrandKey === 'deye' ? 'deye_5' : 'gsb_li5';
+                        } else if (reqBatNominalKwh <= 10.3) {
+                            autoKey = hybridBrandKey === 'deye' ? 'deye_10' : 'gsb_li10';
+                        } else {
+                            autoKey = hybridBrandKey === 'deye' ? 'deye_15' : 'gsb_li15';
+                        }
+
+                        if (autoKey) {
+                            const bObj = BATTERY_CATALOG[autoKey];
+                            if (bObj) {
+                                batLabel = bObj.label;
+                                batUnitPrice = bObj.price;
+                                batQty = manualBatQty > 0 ? manualBatQty : Math.max(1, Math.ceil(reqBatNominalKwh / bObj.kwh));
+                                actualBatKwh = batQty * bObj.kwh;
+                                if (bObj.minV === 48 && chosenHybridKw < 5) {
+                                    chosenHybridKw = 6;
+                                    sysDcVoltage = 48;
+                                    minStringPanels = 4;
+                                }
+                            }
+                        }
+                    } else {
+                        const bObj = BATTERY_CATALOG[batChoice];
+                        if (bObj) {
+                            batLabel = bObj.label;
+                            batUnitPrice = bObj.price;
+                            if (bObj.isGel) {
+                                const seriesCount = sysDcVoltage === 24 ? 2 : 4;
+                                const rawCount = manualBatQty > 0 ? manualBatQty : Math.max(seriesCount, Math.ceil(reqBatNominalKwh / bObj.kwh));
+                                batQty = Math.ceil(rawCount / seriesCount) * seriesCount;
+                                batLabel = `${bObj.label} (توصيل ${sysDcVoltage}V)`;
+                            } else {
+                                batQty = manualBatQty > 0 ? manualBatQty : Math.max(1, Math.ceil(reqBatNominalKwh / bObj.kwh));
+                                if (bObj.minV === 48 && chosenHybridKw < 5) {
+                                    chosenHybridKw = 6;
+                                    sysDcVoltage = 48;
+                                    minStringPanels = 4;
+                                }
+                            }
+                            actualBatKwh = batQty * bObj.kwh;
+                        }
+                    }
+                }
+
+                const effectiveBatEff = batQty > 0 ? batRoundTripEff : 1.0;
+                const reqPvEnergyWh = (genDayWh / inverterEff) + (genNightWh / (inverterEff * effectiveBatEff));
+                genReqKwp = (reqPvEnergyWh / 1000) / (psh * performanceRatio);
+                genPanels = Math.max(minStringPanels, Math.ceil((genReqKwp * 1000) / panelWatt));
+            } else if (effectiveMode === 'agro_only') {
+                batQty = 0;
+                actualBatKwh = 0;
+            }
+
+            const totalPanels = agroPanels + genPanels;
+            const totalKwp = (totalPanels * panelWatt) / 1000;
+            const totalDailyKwh = (agroDayWh + genDayWh + genNightWh) / 1000;
+            const is3PhaseFinal = chosenHybridKw >= 10 || genNeeds3Phase;
+
+            // Safe DOM Updates for KPI Cards & Badges
+            const phaseBadge = document.getElementById('phaseBadge');
+            if (phaseBadge) {
+                if (effectiveMode === 'agro_only') {
+                    phaseBadge.textContent = `${agroBrandObj.label}`;
+                    phaseBadge.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-100 text-emerald-900 border border-emerald-300';
+                } else if (effectiveMode === 'dual') {
+                    phaseBadge.textContent = `نظام مزدوج`;
+                    phaseBadge.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-amber-100 text-amber-900 border border-amber-300';
+                } else {
+                    phaseBadge.textContent = is3PhaseFinal ? `${hybridBrandObj.label} (3-Phase 380V)` : `${hybridBrandObj.label} (220V)`;
+                    phaseBadge.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-sky-100 text-sky-900 border border-sky-300';
+                }
+            }
+
+            const catBadge = document.getElementById('systemCategoryBadge');
+            if (catBadge) {
+                if (effectiveMode === 'agro_only') {
+                    catBadge.textContent = 'منظومة ري زراعي صرفة';
+                    catBadge.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-100 text-emerald-900 border border-emerald-300';
+                } else if (effectiveMode === 'dual') {
+                    catBadge.textContent = 'محطة زراعية وسكنية مزدوجة';
+                    catBadge.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-amber-100 text-amber-900 border border-amber-300';
+                } else {
+                    catBadge.textContent = chosenHybridKw >= 15 ? 'منظومة صناعية / تجارية 3-Phase' : 'منظومة منزلية / تجارية هجينة';
+                    catBadge.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-sky-100 text-sky-900 border border-sky-300';
+                }
+            }
+
+            const setElText = (id, txt) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = txt;
+            };
+
+            setElText('resPanels', `${totalPanels} لوح (${panelWatt}W)`);
+            setElText('resKwp', `القدرة الكلية: ${totalKwp.toFixed(2)} kWp`);
+
+            if (effectiveMode === 'agro_only' && chosenAgroInv) {
+                setElText('resInverter', `${chosenAgroInv.kw} kW`);
+                setElText('resInverterType', 'VFD MPPT 380V (3-Phase)');
+            } else if (effectiveMode === 'dual' && chosenAgroInv) {
+                setElText('resInverter', `${chosenAgroInv.kw}kW + ${chosenHybridKw}kW`);
+                setElText('resInverterType', 'فصل الري عن السكن');
+            } else {
+                setElText('resInverter', `${chosenHybridKw} kW`);
+                setElText('resInverterType', is3PhaseFinal ? 'صناعي 3-Phase 380V' : `Hybrid ${sysDcVoltage}V`);
+            }
+
+            setElText('resBattery', actualBatKwh > 0 ? `${actualBatKwh.toFixed(1)} kWh` : '0 kWh');
+            setElText('resBatteryModel', batQty > 0 ? `${batQty} × ${batLabel}` : 'بدون بطاريات');
+            setElText('resPumpHp', agroTotalHp > 0 ? `${agroTotalHp} HP (${agroTotalKw.toFixed(2)}kW)` : 'لا توجد مضخات');
+            setElText('resDailyKwh', `${totalDailyKwh.toFixed(1)} kWh/يوم`);
+
+            // Math Audit Box
+            const mathAuditBox = document.getElementById('mathAuditBox');
+            if (mathAuditBox) {
+                let auditHtml = '';
+                if (chosenAgroInv) {
+                    const stringVoc = (agroPanels * selectedPanel.voc).toFixed(0);
+                    auditHtml += `
+                        <div class="p-2 rounded-lg bg-emerald-50 border border-emerald-200">
+                            <div class="font-black text-emerald-900">1. حسابات منظومة الري الزراعي (${agroBrandObj.label}):</div>
+                            <div>• قدرة المضخات: <strong>${agroTotalHp} HP (${agroTotalKw.toFixed(2)} kW)</strong> × معامل 1.35 = <strong>${(agroTotalKw * 1.35).toFixed(2)} kW</strong> (الحد الأدنى للإنفرتر: <strong>${agroMinVfdKw.toFixed(2)} kW</strong>) ← <strong>${chosenAgroInv.kw}kW VFD</strong>.</div>
+                            ${agroVfdWarning ? `<div class="font-extrabold text-rose-700">⚠️ ${agroVfdWarning}</div>` : ''}
+                            <div>• مصفوفة الألواح: <strong>${agroPanels} لوح × ${panelWatt}W = ${((agroPanels * panelWatt)/1000).toFixed(2)} kWp</strong> (Voc ≈ <strong>${stringVoc}V DC</strong>).</div>
+                        </div>
+                    `;
+                }
+                if (hasGenLoads && chosenHybridKw > 0) {
+                    auditHtml += `
+                        <div class="p-2 rounded-lg bg-sky-50 border border-sky-200">
+                            <div class="font-black text-[#0A1D37]">${chosenAgroInv ? '2. ' : '1. '}حسابات المنظومة الهجينة (${hybridBrandObj.label}):</div>
+                            <div>• استهلاك النهار: <strong>${(genDayWh/1000).toFixed(2)} kWh</strong> | الليل: <strong>${(genNightWh/1000).toFixed(2)} kWh</strong>.</div>
+                            <div>• معادلة الألواح: <strong>${genPanels} لوح ${panelWatt}W</strong> (${genReqKwp.toFixed(2)} kWp).</div>
+                            <div>• سعة البطاريات: <strong>${reqBatNominalKwh.toFixed(2)} kWh</strong> على جهد <strong>${sysDcVoltage}V DC</strong>.</div>
+                        </div>
+                    `;
+                }
+                mathAuditBox.innerHTML = auditHtml || '<div class="text-slate-500">أدخل الأجهزة لعرض الحسابات الهندسية.</div>';
+            }
+
+            // Agro VFD Banner
+            const agroBanner = document.getElementById('agroVfdBanner');
+            if (agroBanner) {
+                if (chosenAgroInv) {
+                    agroBanner.classList.remove('hidden');
+                    agroBanner.innerHTML = `<strong><i class="fa-solid fa-tractor ml-1"></i> المواصفات الفنية (${chosenAgroInv.label}):</strong> نظام ضخ مباشر MPPT/VFD بدون بطاريات لتقليل التكاليف الاستثمارية وعمر افتراضي يتجاوز 25 سنة.${agroVfdWarning ? `<br><span class="font-extrabold text-rose-700">⚠️ ${agroVfdWarning}</span>` : ''}`;
+                } else {
+                    agroBanner.classList.add('hidden');
+                }
+            }
+
+            // BOQ Table
+            const boqBody = document.getElementById('boqTableBody');
+            if (!boqBody) return;
+            boqBody.innerHTML = '';
+
+            if (totalPanels === 0) {
+                setElText('totalSdg', '0 ج.س');
+                setElText('totalUsd', '$0 USD');
+                setElText('totalAed', '0 AED');
+                return;
+            }
+
+            const boqItems = [];
+
+            if (agroPanels > 0 && chosenAgroInv) {
+                boqItems.push({
+                    desc: `ألواح شمسية ${selectedPanel.name} (مصفوفة الري الزراعي)`,
+                    qty: `${agroPanels} لوح`,
+                    unit: selectedPanel.price,
+                    total: agroPanels * selectedPanel.price
+                });
+                boqItems.push({
+                    desc: chosenAgroInv.label,
+                    qty: '1 جهاز',
+                    unit: chosenAgroInv.price,
+                    total: chosenAgroInv.price
+                });
+            }
+
+            if (genPanels > 0 && chosenHybridKw > 0) {
+                const invPrice = hybridBrandObj.tiers[chosenHybridKw] || 6200000;
+                boqItems.push({
+                    desc: `ألواح شمسية ${selectedPanel.name} ${agroPanels > 0 ? '(مصفوفة السكن/المعدات)' : ''}`,
+                    qty: `${genPanels} لوح`,
+                    unit: selectedPanel.price,
+                    total: genPanels * selectedPanel.price
+                });
+                boqItems.push({
+                    desc: `إنفرتر ${hybridBrandObj.label} ${chosenHybridKw}kW ${is3PhaseFinal ? '(3-Phase 380V Industrial)' : `(${sysDcVoltage}V Hybrid)`}`,
+                    qty: '1 جهاز',
+                    unit: invPrice,
+                    total: invPrice
+                });
+            }
+
+            if (batQty > 0) {
+                boqItems.push({
+                    desc: batLabel,
+                    qty: `${batQty} وحدة`,
+                    unit: batUnitPrice,
+                    total: batQty * batUnitPrice
+                });
+            }
+
+            const cablesCost = totalPanels <= 8 ? 750000 : (totalPanels <= 20 ? 1500000 : 2800000);
+            const installCost = totalPanels <= 8 ? 950000 : (totalPanels <= 20 ? 1900000 : 3400000);
+
+            boqItems.push(
+                { desc: 'هياكل تثبيت مجلفنة ومقاومة للرياح', qty: `${totalPanels} قاعدة`, unit: PRICES.mount_per_panel, total: totalPanels * PRICES.mount_per_panel },
+                { desc: 'كيبلات شمسية ولوحات حماية AC/DC ومانع صواعق وتأريض', qty: '1 طقم', unit: cablesCost, total: cablesCost },
+                { desc: 'التركيب الهندسي والبرمجة والتشغيل والاختبار', qty: '1 مقطوعية', unit: installCost, total: installCost }
+            );
+
+            let grandTotalSdg = 0;
+            boqItems.forEach(row => {
+                grandTotalSdg += row.total;
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50';
+                tr.innerHTML = `
+                    <td class="py-2 px-2.5 font-bold text-[#0A1D37]">${row.desc}</td>
+                    <td class="py-2 px-1.5 text-center font-bold text-slate-700">${row.qty}</td>
+                    <td class="py-2 px-2 text-left text-slate-600 font-semibold">${row.unit.toLocaleString('en-US')}</td>
+                    <td class="py-2 px-2.5 text-left font-black text-slate-900">${row.total.toLocaleString('en-US')}</td>
+                `;
+                boqBody.appendChild(tr);
+            });
+
+            setElText('totalSdg', formatSDG(grandTotalSdg));
+            setElText('totalUsd', '$' + Math.round(grandTotalSdg / usdRate).toLocaleString('en-US') + ' USD');
+            setElText('totalAed', Math.round(grandTotalSdg / aedRate).toLocaleString('en-US') + ' AED');
+
+            // Engineering Recommendations
+            const notesList = document.getElementById('engNotesList');
+            if (notesList) {
+                notesList.innerHTML = `
+                    ${chosenAgroInv ? `<li><strong>الإنفرتر الزراعي (${agroBrandObj.label}):</strong> تم تحجيم مصفوفة الألواح لضمان عمل الغاطس بكامل طاقته من 8:30 صباحاً حتى 4:30 عصراً.</li>` : ''}
+                    ${effectiveMode === 'dual' ? `<li><strong>نظام العزل المزدوج:</strong> فصل دائرة الري الزراعي عن السكن لمنع تذبذب الجهد.</li>` : ''}
+                    <li>تم اعتماد معامل خسائر مناخية <strong>20%</strong>، وسعر صرف <strong>1 USD = ${usdRate.toLocaleString('en-US')} ج.س</strong>.</li>
+                `;
+            }
+        }
+
+        // =========================================================================
+        // 7. PRINT & TOAST UTILITIES
+        // =========================================================================
+        function printProposal() {
+            const now = new Date();
+            const citySel = document.getElementById('cityPsh');
+            const cityName = citySel ? (citySel.options[citySel.selectedIndex]?.getAttribute('data-city') || 'الخرطوم') : 'الخرطوم';
+            const usdRate = parseFloat(document.getElementById('usdRate').value) || 9300;
+            const aedRate = parseFloat(document.getElementById('aedRate').value) || 2532;
+
+            const clientNameEl = document.getElementById('clientName');
+            const printClientName = document.getElementById('printClientName');
+            if (printClientName) {
+                printClientName.textContent = clientNameEl ? (clientNameEl.value || 'عميل بابل للاستشارات الهندسية') : 'عميل بابل للاستشارات الهندسية';
+            }
+            const printCityName = document.getElementById('printCityName');
+            if (printCityName) printCityName.textContent = cityName;
+            const printDate = document.getElementById('printDate');
+            if (printDate) printDate.textContent = now.toLocaleDateString('ar-SD', { year: 'numeric', month: 'long', day: 'numeric' });
+            const printRef = document.getElementById('printRef');
+            if (printRef) printRef.textContent = `BABEL-${now.getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+            const printFx = document.getElementById('printFx');
+            if (printFx) printFx.textContent = `1 USD = ${usdRate.toLocaleString('en-US')} SDG | 1 AED = ${aedRate.toLocaleString('en-US')} SDG`;
+            window.print();
+        }
+
+        function showToast(msg) {
+            const box = document.getElementById('toast-box');
+            if (!box) return;
+            document.getElementById('toast-message').textContent = msg;
+            box.classList.remove('hidden');
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => box.classList.add('hidden'), 2800);
+        }
+
+        window.onload = function () {
+            renderCatalogTable();
+            parseNaturalText(false);
+        };
+    </script>
+</body>
+</html>
